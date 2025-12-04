@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>СТРУГАЦКИЕ | Острые миры братьев</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Основные стили - Острый, гранёный дизайн */
+        :root {
+            --bg-dark: #0a0a0a;
+            --surface-dark: #111111;
+            --surface-lighter: #1a1a1a;
+            --text-dark: #ffffff;
+            --text-muted: #b0b0b0;
+            --accent-color: #8A2BE2;
+            --accent-secondary: #8B0000;
+            --glow-color: rgba(138, 43, 226, 0.5);
+            --border-color: #333333;
+            --sharp-shadow: 0 0 10px rgba(138, 43, 226, 0.4);
+            --hover-bg: #1a0a2a;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-dark);
+            line-height: 1.5;
+            overflow-x: hidden;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 500;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Orbitron', monospace;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Шапка сайта - острый стиль */
+        header {
+            background-color: rgba(10, 10, 10, 0.98);
+            border-bottom: 3px solid var(--accent-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 15px 0;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.7);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--text-dark);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-shadow: 0 0 8px var(--accent-color);
+        }
+        
+        .logo i {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            filter: drop-shadow(0 0 6px var(--accent-color));
+        }
+        
+        .logo span {
+            background: linear-gradient(45deg, var(--accent-color), var(--accent-secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 900;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 40px;
+        }
+        
+        nav a {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s;
+            position: relative;
+            padding: 5px 0;
+            font-size: 1.1rem;
+        }
+        
+        nav a:hover {
+            color: var(--accent-color);
+            text-shadow: 0 0 6px var(--accent-color);
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-color), var(--accent-secondary));
+            transition: width 0.3s;
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        /* Якоря для навигации */
+        .anchor {
+            position: relative;
+            top: -100px;
+            visibility: hidden;
+        }
+        
+        /* Герой-секция - острый стиль */
+        .hero {
+            padding: 150px 0;
+            background: 
+                linear-gradient(45deg, rgba(10, 10, 10, 0.9) 0%, rgba(17, 17, 17, 0.9) 100%),
+                url('https://images.unsplash.com/photo-1505506874110-6a7a69069a08?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            text-align: center;
+            border-bottom: 3px solid var(--accent-color);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent 30%, rgba(138, 43, 226, 0.08) 50%, transparent 70%);
+            animation: scan 3s linear infinite;
+        }
+        
+        @keyframes scan {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
+        }
+        
+        .hero h1 {
+            font-size: 4.5rem;
+            margin-bottom: 30px;
+            background: linear-gradient(45deg, var(--accent-color), var(--accent-secondary), var(--accent-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 15px rgba(138, 43, 226, 0.4);
+            animation: pulse 2s infinite alternate;
+        }
+        
+        @keyframes pulse {
+            0% { text-shadow: 0 0 15px rgba(138, 43, 226, 0.4); }
+            100% { text-shadow: 0 0 20px rgba(138, 43, 226, 0.6), 0 0 25px rgba(139, 0, 0, 0.4); }
+        }
+        
+        .hero p {
+            font-size: 1.5rem;
+            max-width: 900px;
+            margin: 0 auto 50px;
+            color: var(--text-dark);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+            font-weight: 500;
+            text-transform: none;
+            letter-spacing: normal;
+        }
+        
+        .years {
+            display: inline-block;
+            background-color: rgba(26, 26, 26, 0.9);
+            padding: 15px 35px;
+            border-radius: 0;
+            font-size: 1.3rem;
+            color: var(--accent-color);
+            border: 2px solid var(--accent-color);
+            font-weight: 700;
+            text-shadow: 0 0 6px var(--accent-color);
+            box-shadow: 0 0 10px rgba(138, 43, 226, 0.4);
+            clip-path: polygon(10% 0, 90% 0, 100% 50%, 90% 100%, 10% 100%, 0 50%);
+        }
+        
+        /* Секции */
+        section {
+            padding: 100px 0;
+            position: relative;
+        }
+        
+        section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 10%;
+            width: 80%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+        }
+        
+        .section-title {
+            font-size: 3.5rem;
+            margin-bottom: 70px;
+            position: relative;
+            display: inline-block;
+            color: var(--text-dark);
+            text-align: center;
+            width: 100%;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 5px;
+            background: linear-gradient(90deg, var(--accent-color), var(--accent-secondary));
+            border-radius: 0;
+            box-shadow: 0 0 10px var(--accent-color);
+        }
+        
+        /* О братьях */
+        .brothers-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 50px;
+            margin-bottom: 80px;
+        }
+        
+        .brother-card {
+            background-color: rgba(17, 17, 17, 0.9);
+            border-radius: 0;
+            padding: 40px;
+            border: 2px solid var(--accent-color);
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+            clip-path: polygon(0 0, 95% 0, 100% 5%, 100% 100%, 5% 100%, 0 95%);
+        }
+        
+        /* Изменение фона при наведении на карточки братьев */
+        .brother-card:hover {
+            background-color: var(--hover-bg);
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 20px 35px rgba(0, 0, 0, 0.8), 0 0 20px var(--glow-color);
+        }
+        
+        .brother-card h3 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            color: var(--accent-color);
+            text-shadow: 0 0 6px rgba(138, 43, 226, 0.6);
+        }
+        
+        .brother-card .dates {
+            color: var(--accent-secondary);
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: block;
+            font-size: 1.2rem;
+            text-shadow: 0 0 5px rgba(139, 0, 0, 0.6);
+        }
+        
+        .brother-card p {
+            color: var(--text-dark);
+            font-size: 1.1rem;
+            line-height: 1.6;
+            text-transform: none;
+            letter-spacing: normal;
+        }
+        
+        /* Книги */
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 40px;
+        }
+        
+        .book-card {
+            background-color: rgba(17, 17, 17, 0.9);
+            border-radius: 0;
+            overflow: hidden;
+            border: 2px solid var(--accent-color);
+            transition: all 0.4s;
+            position: relative;
+            clip-path: polygon(0 0, 92% 0, 100% 8%, 100% 100%, 8% 100%, 0 92%);
+        }
+        
+        .book-card:hover {
+            transform: translateY(-15px) rotateX(5deg);
+            box-shadow: 0 20px 35px rgba(0, 0, 0, 0.9), 0 0 20px var(--glow-color);
+        }
+        
+        .book-img {
+            height: 220px;
+            background-color: var(--surface-lighter);
+            border-bottom: 2px solid var(--accent-color);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .book-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s;
+        }
+        
+        .book-card:hover .book-img img {
+            transform: scale(1.1);
+        }
+        
+        .book-content {
+            padding: 25px;
+        }
+        
+        .book-year {
+            display: inline-block;
+            background-color: var(--surface-lighter);
+            color: var(--accent-secondary);
+            padding: 8px 15px;
+            border-radius: 0;
+            font-size: 1rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+            border: 1px solid var(--accent-secondary);
+            text-shadow: 0 0 5px rgba(139, 0, 0, 0.6);
+            clip-path: polygon(10% 0, 90% 0, 100% 50%, 90% 100%, 10% 100%, 0 50%);
+        }
+        
+        .book-card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+            color: var(--text-dark);
+            text-shadow: 0 0 6px var(--accent-color);
+        }
+        
+        .book-card p {
+            color: var(--text-dark);
+            font-size: 1rem;
+            line-height: 1.5;
+            text-transform: none;
+            letter-spacing: normal;
+        }
+        
+        /* Экранизации */
+        .films-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 40px;
+        }
+        
+        .film-card {
+            background-color: rgba(17, 17, 17, 0.9);
+            border-radius: 0;
+            overflow: hidden;
+            border: 2px solid var(--accent-secondary);
+            transition: all 0.4s;
+            position: relative;
+            clip-path: polygon(8% 0, 100% 0, 100% 92%, 92% 100%, 0 100%, 0 8%);
+        }
+        
+        .film-card:hover {
+            transform: translateY(-15px) rotateY(5deg);
+            box-shadow: 0 20px 35px rgba(0, 0, 0, 0.9), 0 0 20px rgba(139, 0, 0, 0.6);
+        }
+        
+        .film-img {
+            height: 200px;
+            background-color: var(--surface-lighter);
+            border-bottom: 2px solid var(--accent-secondary);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .film-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s;
+        }
+        
+        .film-card:hover .film-img img {
+            transform: scale(1.1);
+        }
+        
+        .film-content {
+            padding: 25px;
+        }
+        
+        .film-year {
+            display: inline-block;
+            background-color: var(--surface-lighter);
+            color: var(--accent-color);
+            padding: 8px 15px;
+            border-radius: 0;
+            font-size: 1rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+            border: 1px solid var(--accent-color);
+            text-shadow: 0 0 5px rgba(138, 43, 226, 0.6);
+            clip-path: polygon(0 0, 90% 0, 100% 50%, 90% 100%, 10% 100%, 0 50%);
+        }
+        
+        .film-card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+            color: var(--text-dark);
+            text-shadow: 0 0 6px var(--accent-secondary);
+        }
+        
+        .director {
+            color: var(--accent-secondary);
+            font-style: normal;
+            margin-bottom: 15px;
+            display: block;
+            font-weight: 700;
+            text-shadow: 0 0 5px rgba(139, 0, 0, 0.6);
+        }
+        
+        .film-card p {
+            color: var(--text-dark);
+            font-size: 1rem;
+            line-height: 1.5;
+            text-transform: none;
+            letter-spacing: normal;
+        }
+        
+        /* Цитата */
+        .quote-section {
+            background: linear-gradient(45deg, rgba(17, 17, 17, 0.95), rgba(26, 26, 26, 0.95));
+            border-radius: 0;
+            padding: 80px;
+            text-align: center;
+            border: 3px solid var(--accent-color);
+            margin: 100px 0;
+            position: relative;
+            overflow: hidden;
+            clip-path: polygon(0 0, 95% 0, 100% 5%, 100% 95%, 95% 100%, 0 100%);
+        }
+        
+        .quote-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent 30%, rgba(138, 43, 226, 0.05) 50%, transparent 70%);
+            animation: rotate 20s linear infinite;
+            z-index: 0;
+        }
+        
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .quote {
+            font-size: 2.5rem;
+            font-style: italic;
+            margin-bottom: 30px;
+            line-height: 1.4;
+            color: var(--text-dark);
+            max-width: 1000px;
+            margin: 0 auto 40px;
+            position: relative;
+            z-index: 1;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.9);
+            font-weight: 700;
+            text-transform: none;
+            letter-spacing: normal;
+        }
+        
+        .quote-author {
+            font-size: 1.5rem;
+            color: var(--accent-secondary);
+            position: relative;
+            z-index: 1;
+            font-weight: 700;
+            text-shadow: 0 0 5px rgba(139, 0, 0, 0.6);
+        }
+        
+        /* Подвал */
+        footer {
+            background-color: rgba(10, 10, 10, 0.98);
+            border-top: 3px solid var(--accent-color);
+            padding: 80px 0 40px;
+            margin-top: 100px;
+            position: relative;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-color), var(--accent-secondary), var(--accent-color));
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 50px;
+            margin-bottom: 60px;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            color: var(--accent-color);
+            text-shadow: 0 0 6px var(--accent-color);
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column li {
+            margin-bottom: 15px;
+            position: relative;
+            padding-left: 20px;
+        }
+        
+        .footer-column li::before {
+            content: '▶';
+            position: absolute;
+            left: 0;
+            color: var(--accent-secondary);
+        }
+        
+        .footer-column a {
+            color: var(--text-dark);
+            text-decoration: none;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+        
+        .footer-column a:hover {
+            color: var(--accent-color);
+            text-shadow: 0 0 6px var(--accent-color);
+            padding-left: 10px;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 40px;
+            border-top: 2px solid var(--border-color);
+            color: var(--text-muted);
+            font-size: 1rem;
+            position: relative;
+        }
+        
+        .copyright::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: 25%;
+            width: 50%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+        }
+        
+        .massaraksh {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            font-weight: 700;
+            text-shadow: 0 0 8px var(--accent-color);
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 1024px) {
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+            
+            .section-title {
+                font-size: 2.8rem;
+            }
+            
+            .brothers-info {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 25px;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 25px;
+            }
+            
+            .hero {
+                padding: 100px 0;
+            }
+            
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+            
+            .years {
+                font-size: 1.1rem;
+                padding: 12px 25px;
+            }
+            
+            section {
+                padding: 70px 0;
+            }
+            
+            .section-title {
+                font-size: 2.3rem;
+            }
+            
+            .quote {
+                font-size: 1.8rem;
+            }
+            
+            .quote-section {
+                padding: 50px 30px;
+            }
+            
+            .book-card, .film-card {
+                clip-path: none;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .section-title {
+                font-size: 1.9rem;
+            }
+            
+            .brother-card, .book-card, .film-card {
+                padding: 25px;
+                clip-path: none;
+            }
+            
+            .quote-section {
+                padding: 40px 20px;
+            }
+            
+            .quote {
+                font-size: 1.5rem;
+            }
+            
+            .logo {
+                font-size: 1.6rem;
+            }
+            
+            .logo i {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка сайта -->
+    <header>
+        <div class="container header-content">
+            <a href="#" class="logo">
+                <i class="fas fa-bolt"></i>
+                <span>СТРУГАЦКИЕ</span>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="#brothers">БРАТЬЯ</a></li>
+                    <li><a href="#books">КНИГИ</a></li>
+                    <li><a href="#films">ЭКРАНИЗАЦИИ</a></li>
+                    <li><a href="#quote">ЦИТАТА</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Герой-секция -->
+    <section class="hero">
+        <div class="container">
+            <h1>МИР БРАТЬЕВ СТРУГАЦКИХ</h1>
+            <p>Аркадий Натанович и Борис Натанович Стругацкие — культовые советские писатели-фантасты, чьи произведения стали классикой мировой литературы и оказали огромное влияние на развитие жанра.</p>
+            <div class="years">1925-1991 • 1933-2012</div>
+        </div>
+    </section>
+
+    <!-- Якорь для братьев -->
+    <div id="brothers" class="anchor"></div>
+    
+    <!-- О братьях -->
+    <section class="container">
+        <h2 class="section-title">БРАТЬЯ СТРУГАЦКИЕ</h2>
+        <div class="brothers-info">
+            <div class="brother-card">
+                <h3>АРКАДИЙ СТРУГАЦКИЙ</h3>
+                <span class="dates">28 АВГУСТА 1925 — 12 ОКТЯБРЯ 1991</span>
+                <p>Старший брат, переводчик, сценарист. Участник Великой Отечественной войны. Окончил Военный институт иностранных языков. Работал редактором. Переводил японскую литературу. Совместно с братом создал уникальный мир социальной и философской фантастики.</p>
+            </div>
+            <div class="brother-card">
+                <h3>БОРИС СТРУГАЦКИЙ</h3>
+                <span class="dates">15 АПРЕЛЯ 1933 — 19 НОЯБРЯ 2012</span>
+                <p>Младший брат, астроном, писатель, переводчик. Окончил механико-математический факультет ЛГУ. Работал в Пулковской обсерватории. После смерти брата продолжил литературную деятельность под псевдонимом С. Витицкий. Лауреат многочисленных премий.</p>
+            </div>
+        </div>
+        <p style="color: var(--accent-secondary); font-size: 1.3rem; max-width: 900px; margin: 0 auto; text-align: center; text-shadow: 0 0 5px rgba(139,0,0,0.6); font-weight: 700;">
+           Их книги переведены на 42 языка и изданы тиражом более 500 миллионов экземпляров по всему миру.
+        </p>
+    </section>
+
+    <!-- Якорь для книг -->
+    <div id="books" class="anchor"></div>
+    
+    <!-- Книги -->
+    <section class="container">
+        <h2 class="section-title">ПРОИЗВЕДЕНИЯ</h2>
+        <div class="books-grid">
+            <div class="book-card">
+                <div class="book-img">
+                    <img src="https://cv2.litres.ru/pub/c/cover_415/68804201.jpg" alt="Обложка книги Трудно быть богом">
+                </div>
+                <div class="book-content">
+                    <span class="book-year">1964</span>
+                    <h3>ТРУДНО БЫТЬ БОГОМ</h3>
+                    <p>Роман о цивилизации, застрявшей в Средневековье, и гуманистической миссии прогрессоров.</p>
+                </div>
+            </div>
+            <div class="book-card">
+                <div class="book-img">
+                    <img src="https://cv1.litres.ru/pub/c/cover_415/68804203.jpg" alt="Обложка книги Пикник на обочине">
+                </div>
+                <div class="book-content">
+                    <span class="book-year">1972</span>
+                    <h3>ПИКНИК НА ОБОЧИНЕ</h3>
+                    <p>История сталкера Рэдрика Шухарта и аномальной Зоны, оставленной пришельцами.</p>
+                </div>
+            </div>
+            <div class="book-card">
+                <div class="book-img">
+                    <img src="https://cv8.litres.ru/pub/c/cover_415/68804209.jpg" alt="Обложка книги Понедельник начинается в субботу">
+                </div>
+                <div class="book-content">
+                    <span class="book-year">1965</span>
+                    <h3>ПОНЕДЕЛЬНИК НАЧИНАЕТСЯ В СУББОТУ</h3>
+                    <p>Юмористическая фантастика о работниках НИИЧАВО — Научно-исследовательского института Чародейства и Волшебства.</p>
+                </div>
+            </div>
+            <div class="book-card">
+                <div class="book-img">
+                    <img src="https://cv0.litres.ru/pub/c/cover_415/68804211.jpg" alt="Обложка книги Обитаемый остров">
+                </div>
+                <div class="book-content">
+                    <span class="book-year">1969</span>
+                    <h3>ОБИТАЕМЫЙ ОСТРОВ</h3>
+                    <p>Социальная антиутопия о планете Саракш, где власти манипулируют сознанием населения.</p>
+                </div>
+            </div>
+            <div class="book-card">
+                <div class="book-img">
+                    <img src="https://cv7.litres.ru/pub/c/cover_415/68804215.jpg" alt="Обложка книги Жук в муравейнике">
+                </div>
+                <div class="book-content">
+                    <span class="book-year">1980</span>
+                    <h3>ЖУК В МУРАВЕЙНИКЕ</h3>
+                    <p>Детективная фантастика о работе прогрессоров и загадке Льва Абалкина.</p>
+                </div>
+            </div>
+            <div class="book-card">
+                <div class="book-img">
+                    <img src="https://cv9.litres.ru/pub/c/cover_415/68804217.jpg" alt="Обложка книги Град обреченный">
+                </div>
+                <div class="book-content">
+                    <span class="book-year">1986</span>
+                    <h3>ГРАД ОБРЕЧЕННЫЙ</h3>
+                    <p>Философский роман о социальном эксперименте и поисках смысла жизни.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Якорь для экранизаций -->
+    <div id="films" class="anchor"></div>
+    
+    <!-- Экранизации -->
+    <section class="container">
+        <h2 class="section-title">ЭКРАНИЗАЦИИ</h2>
+        <div class="films-grid">
+            <div class="film-card">
+                <div class="film-img">
+                    <img src="https://share.google/images/4qrR87K0uR8xjycii" alt="Сталкер - кадр из фильма">
+                </div>
+                <div class="film-content">
+                    <span class="film-year">1979</span>
+                    <h3>СТАЛКЕР</h3>
+                    <span class="director">Режиссер: Андрей Тарковский</span>
+                    <p>Экранизация повести "Пикник на обочине". Философская притча о Зоне, Исполнителе желаний и поиске смысла.</p>
+                </div>
+            </div>
+            <div class="film-card">
+                <div class="film-img">
+                    <img src="https://avatars.mds.yandex.net/get-kinopoisk-image/1946459/8b73e6cd-70c8-4daf-9b5e-b05cd6af98b0/600x900" alt="Трудно быть богом - кадр из фильма">
+                </div>
+                <div class="film-content">
+                    <span class="film-year">2013</span>
+                    <h3>ТРУДНО БЫТЬ БОГОМ</h3>
+                    <span class="director">Режиссер: Алексей Герман</span>
+                    <p>Масштабная экранизация одноименного романа. Фильм снимался 14 лет, действие происходит на планете Арканар.</p>
+                </div>
+            </div>
+            <div class="film-card">
+                <div class="film-img">
+                    <img src="https://avatars.mds.yandex.net/get-kinopoisk-image/1946459/447c5a78-2788-424c-bf2f-b1c2a1d4297a/600x900" alt="Дни затмения - кадр из фильма">
+                </div>
+                <div class="film-content">
+                    <span class="film-year">1988</span>
+                    <h3>ДНИ ЗАТМЕНИЯ</h3>
+                    <span class="director">Режиссер: Александр Сокуров</span>
+                    <p>Вольная экранизация повести "За миллиард лет до конца света". Фильм о выборе между наукой и мистикой.</p>
+                </div>
+            </div>
+            <div class="film-card">
+                <div class="film-img">
+                    <img src="https://avatars.mds.yandex.net/get-kinopoisk-image/1946459/0c69f8e6-bbf5-4f5b-8d87-e0a3b714ec58/600x900" alt="Обитаемый остров - кадр из фильма">
+                </div>
+                <div class="film-content">
+                    <span class="film-year">2006</span>
+                    <h3>ОБИТАЕМЫЙ ОСТРОВ</h3>
+                    <span class="director">Режиссер: Фёдор Бондарчук</span>
+                    <p>Двухсерийный фильм по мотивам одноименного романа. Бюджетная фантастика о планете Саракш.</p>
+                </div>
+            </div>
+            <div class="film-card">
+                <div class="film-img">
+                    <img src="https://avatars.mds.yandex.net/get-kinopoisk-image/1946459/f816d28e-fae4-4d5f-a0b0-33533d1a1710/600x900" alt="Отель У погибшего альпиниста - кадр из фильма">
+                </div>
+                <div class="film-content">
+                    <span class="film-year">2027</span>
+                    <h3>ОТЕЛЬ "У ПОГИБШЕГО АЛЬПИНИСТА"</h3>
+                    <span class="director">Режиссер: Александр Домогаров</span>
+                    <p>Экранизация детективно-фантастической повести. Мини-сериал с элементами мистики.</p>
+                </div>
+            </div>
+            <div class="film-card">
+                <div class="film-img">
+                    <img src="https://avatars.mds.yandex.net/get-kinopoisk-image/1946459/ef7d6d0d-4d20-40d7-851c-4b1582b7bced/600x900" alt="Пикник на обочине - концепт фильма">
+                </div>
+                <div class="film-content">
+                    <span class="film-year">20??</span>
+                    <h3>ПИКНИК НА ОБОЧИНЕ</h3>
+                    <span class="director">20?? (в разработке)</span>
+                    <p>Фильм по одноименному роману. Кинокартину автор снимает в одиночку
+                    <a href="https://t.me/kladovka_shokshow" target="_blank" style="color: var(--accent-color); text-decoration: none; font-weight: 700;">подробнее</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Якорь для цитаты -->
+    <div id="quote" class="anchor"></div>
+    
+    <!-- Цитата -->
+    <section class="container">
+        <div class="quote-section">
+            <p class="quote">"Счастье для всех, даром, и пусть никто не уйдёт обиженным!"</p>
+            <p class="quote-author">— Рэдрик Шухарт, "Пикник на обочине"</p>
+        </div>
+    </section>
+
+    <!-- Подвал -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Мир Стругацких</h3>
+                    <p>Сайт посвящен творчеству братьев Аркадия и Бориса Стругацких - величайших фантастов XX века.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Быстрые ссылки</h3>
+                    <ul>
+                        <li><a href="https://share.google/wbjO6UZfq0GPSJ4Oz" target="_blank">Братья Стругацкие</a></li>
+                        <li><a href="https://share.google/VdwzocL1Cs8YZYzHe" target="_blank">Книги</a></li>
+                        <li><a href="https://share.google/VlRuyd025eCtTUlwT" target="_blank">Экранизации</a></li>
+                        <li><a href="https://share.google/2Mi7pPzQef1tqxV86" target="_blank">Цитаты</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Контакт</h3>
+                    <p>По вопросам и предложениям:<br>
+                    <a href="https://t.me/dibyn" target="_blank">@Dibyn</a></p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p> Вы говорили,что сюда нужно написать что-то конкретное, но я забыла что</p>
+                <div class="massaraksh">
+                    МАССАРАКШ!
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Простой скрипт для плавной прокрутки и добавления интерактивности
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Добавление эффекта при прокрутке
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.backgroundColor = 'rgba(10, 10, 10, 0.98)';
+                header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.3)';
+            } else {
+                header.style.backgroundColor = 'rgba(10, 10, 10, 0.95)';
+                header.style.boxShadow = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
